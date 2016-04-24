@@ -1,0 +1,16 @@
+import java.sql.*;
+
+public class sample{
+	public static void main(String[]args){
+		try{
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/ecom","root","");
+			Statement query = conn.createStatement();
+			ResultSet rslt = query.executeQuery("select * from sample");
+			while (rslt.next()){
+				System.out.println(rslt.getInt("id")+" "+rslt.getString("fname")+" "+rslt.getString("lname")+"\n");
+			}
+		}catch(Exception ecx){
+			ecx.printStackTrace();
+		}
+	}
+}

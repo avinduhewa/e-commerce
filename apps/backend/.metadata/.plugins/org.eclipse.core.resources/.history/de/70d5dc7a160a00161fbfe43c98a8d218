@@ -1,0 +1,22 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class Buyer{
+	public static final String url = "jdbc:mysql://localhost/ecom";
+	public static final String username = "root";
+	public static final String password = "";
+	public static void main(String[]args){
+		try{
+			Connection conn = DriverManager.getConnection(url,username,password);
+			Statement query = conn.createStatement();
+			ResultSet rslt = query.executeQuery("select * from buyer");
+			while (rslt.next()){
+				System.out.println(rslt.getInt("userid")+" "+rslt.getString("fname")+" "+rslt.getString("lname")+" "+rslt.getString("email")+" "+rslt.getString("password"));
+			}
+		}catch(Exception ecx){
+			ecx.printStackTrace();
+		}
+	}
+}

@@ -1,0 +1,46 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+public class Item{
+	public static final String url = "jdbc:mysql://localhost/ecom";
+	public static final String username = "root";
+	public static final String password = "";
+	//public static ArrayList itemList = new ArrayList();
+	
+	public static void main(String[]args){
+		loadItems();
+	}
+	
+	// loading the data into an array list
+	public static void loadItems(){
+		try{
+			Connection conn = DriverManager.getConnection(url,username,password);
+			Statement query = conn.createStatement();
+			ResultSet rslt = query.executeQuery("select * from item");
+			// table data variables
+			int itemid,sellerid;
+			double price;
+			String title,description,image,location,status;
+			while (rslt.next()){
+				ArrayList item = new ArrayList();
+				item.add(rslt.getInt("itemid"));
+				System.out.println(item);
+				title = rslt.getString("title");
+				description = rslt.getString("description");
+				image = rslt.getString("image");
+				price = rslt.getDouble("price");
+				location = rslt.getString("location");
+				sellerid = rslt.getInt("sellerid");
+				status = rslt.getString("status");
+				
+				// adding the data into the array
+				
+			}
+		}catch(Exception ecx){
+			ecx.printStackTrace();
+		}
+	}
+}
